@@ -1,0 +1,15 @@
+# HTTP
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"Possivel HTTP flood de entrada, possivel DDOS"; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity; sid:5;)
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"Possivel HTTP flood de saida, possivel DDOS"; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity; sid:6;)
+
+# UDP
+alert udp $EXTERNAL_NET any -> $HOME_NET any (msg:"Possivel UDP flood de entrada, possivel DDOS"; flow:to_server; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity; sid:7;)
+alert udp $HOME_NET any -> $EXTERNAL_NET any (msg:"Possivel UDP flood de saida, possivel DDOS"; flow:to_server; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity; sid:8;)
+
+# SYN flood 
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"Possivel SYN flood de entrada, possivel DDOS"; flow:to_server; flags: S,12; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity; sid:9;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"Possivel SYN flood de saida, possivel DDOS"; flow:to_server; flags: S,12; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity; sid:10;)
+
+# ICMP
+alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"Possivel ICMP flood de entrada, possivel DDOS"; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity; sid:11;)
+alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg:"Possivel ICMP flood de saida, possivel DDOS"; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity; sid:12;)

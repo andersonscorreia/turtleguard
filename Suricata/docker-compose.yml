@@ -1,0 +1,10 @@
+version: '3'
+services:
+  suricata:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: suricata
+    network_mode: host   
+ 
+  

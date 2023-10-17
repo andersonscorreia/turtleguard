@@ -1,0 +1,1 @@
+FROM zabbix/zabbix-agent2:alpine-5.0.1
